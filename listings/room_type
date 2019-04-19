@@ -1,7 +1,0 @@
-import numpy as np
-import pandas as pd
-
-from pandas import DataFrame, Series
-
-dataset = pd.read_csv("austin_listings.csv", header = 0)
-print(dataset.shape)
