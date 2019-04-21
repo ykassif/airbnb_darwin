@@ -15,9 +15,10 @@ for row in dataset.itertuples():
 	for a in am:
 		a = a.strip('"')
 		if a not in mem and 'ther' not in mem and '_49' not in a and 'Stair g' not in a and ' hoist' not in a and 'corner guar' not in a and a != '' and '_50' not in a:
+			a = a.replace(' ', '_')
 			mem.append(a)
 for i in range(len(mem)):
-	mem[i] = [mem[i], [0]]
+	mem[i] = [mem[i], ['no']]
 for row in dataset.itertuples():
 	am = str(row.amenities).strip('{')
 	am = am.strip('}')
@@ -26,24 +27,27 @@ for row in dataset.itertuples():
 		flag = False
 		for a in am:
 			a = a.strip('"')
+			a = a.replace(' ', '_')
 			if a == m[0]:
 				flag = True
 		if flag == False:
 			if len(m) < 3:
 				m.append('count')
 			else:
-				m[1].append(0)
+				m[1].append('no')
 		else:
 			if len(m) < 3:
 				m.append('count')
-				m[1] = [1]
+				m[1] = ['yes']
 			else:
-				m[1].append(1)
+				m[1].append('yes')
 hitlist = []
 for i in range(len(mem)-1):
 	att = mem[i]
-	if sum(att[1]) < 250:
+	att = list(filter(('no').__ne__, att[1]))
+	if len(att) < 750:
 		hitlist.append(i)
+hitlist = sorted(hitlist, reverse=True)
 for x in hitlist:
 	del mem[x]
 for m in mem:
