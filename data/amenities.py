@@ -44,6 +44,7 @@ for i in range(len(mem)-1):
 	att = mem[i]
 	if sum(att[1]) < 250:
 		hitlist.append(i)
+hitlist = sorted(hitlist, reverse=True)
 for x in hitlist:
 	del mem[x]
 for m in mem:
