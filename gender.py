@@ -8,7 +8,6 @@ dataset = pd.read_csv("austin_listings.csv", header = 0)
 import gender_guesser.detector as gender
 
 d = gender.Detector()
-
 genders = []
 comp = []
 comp.append("rent")
